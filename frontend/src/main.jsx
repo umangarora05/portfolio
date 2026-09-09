@@ -128,7 +128,7 @@ function App() {
                 aria-label="View Umang Arora profile"
                 aria-expanded={profilePinned}
               >
-                <img className="logo-photo" src="/images/umang-navbar.png" alt="Umang Arora" />
+                <img className="logo-photo" src="/images/umang-navbar-new.jpg" alt="Umang Arora" />
               </button>
               <div className="profile-card" role="dialog" aria-label="About Umang Arora">
                 <button

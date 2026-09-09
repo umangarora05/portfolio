@@ -101,7 +101,7 @@ a {
   height: 64px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center center;
+  object-position: 36% 50%;
   image-rendering: auto;
   box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
 }
