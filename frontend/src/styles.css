@@ -745,6 +745,16 @@ section {
   border-bottom: 4px solid var(--accent);
 }
 
+.achievement-link {
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.achievement-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(44, 62, 80, 0.18);
+}
+
 .achievement-number {
   font-size: 3rem;
   font-weight: 800;

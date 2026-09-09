@@ -5,6 +5,7 @@ import './styles.css';
 
 const emailAddress = 'umangarora2003@gmail.com';
 const emailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent('Portfolio enquiry')}`;
+const leetcodeProfileUrl = 'https://leetcode.com/u/UmangArora05';
 
 const navLinks = [
   { label: 'Home', href: '#home', icon: Home },
@@ -38,7 +39,9 @@ function LeetCodeWidget() {
 
   return (
     <div className="leetcode-widget animate-fade-up delay-200">
-      <h3>LeetCode Activity</h3>
+      <h3>
+        <a href={leetcodeProfileUrl} target="_blank" rel="noreferrer">LeetCode Activity</a>
+      </h3>
       {loading ? (
         <p>Loading live stats...</p>
       ) : (
@@ -64,7 +67,7 @@ function LeetCodeWidget() {
               </div>
             )}
           </div>
-          <a href="https://leetcode.com/u/UmangArora05" target="_blank" rel="noreferrer" style={{color: 'var(--primary)', marginTop: '24px', display: 'inline-block', fontWeight: '600'}}>
+          <a href={leetcodeProfileUrl} target="_blank" rel="noreferrer" style={{color: 'var(--primary)', marginTop: '24px', display: 'inline-block', fontWeight: '600'}}>
             View Full Profile →
           </a>
         </>
@@ -411,10 +414,10 @@ function App() {
             <h2 className="section-title animate-fade-up">Key <span>Highlights</span></h2>
             
             <div className="achievements-grid animate-fade-up delay-100">
-              <div className="achievement-card">
-                <div className="achievement-number">1+</div>
-                <div className="achievement-label">Years Experience</div>
-              </div>
+              <a className="achievement-card achievement-link" href={leetcodeProfileUrl} target="_blank" rel="noreferrer">
+                <div className="achievement-number">150+</div>
+                <div className="achievement-label">LeetCode Questions Solved</div>
+              </a>
               <div className="achievement-card">
                 <div className="achievement-number">5</div>
                 <div className="achievement-label">Major Projects</div>
