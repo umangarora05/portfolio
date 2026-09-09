@@ -93,6 +93,9 @@ function App() {
   }, []);
 
   useEffect(() => {
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     const handleScroll = () => {
       const sections = ['home', 'about', 'education', 'projects', 'skills', 'achievements', 'contact'];
       let current = '#home';
@@ -105,7 +108,10 @@ function App() {
       setActiveSection(current);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.history.scrollRestoration = 'auto';
+    };
   }, []);
 
   return (
