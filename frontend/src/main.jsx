@@ -3,8 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { Home, User, GraduationCap, Briefcase, Code2, Award, Mail, Github, Linkedin, ExternalLink, FileText } from 'lucide-react';
 import './styles.css';
 
-const emailAddress = 'umangarora2003@gmail.com';
-const emailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}&su=${encodeURIComponent('Portfolio enquiry')}`;
+const emailAddress1 = 'umangarora2003@gmail.com';
+const emailAddress2 = 'umang@umangarora.in';
+
+const getEmailHref = (to) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent('Portfolio enquiry')}`;
+
 const leetcodeProfileUrl = 'https://leetcode.com/u/UmangArora05';
 
 const navLinks = [
@@ -15,6 +18,32 @@ const navLinks = [
   { label: 'Skills', href: '#skills', icon: Code2 },
   { label: 'Contact', href: '#contact', icon: Mail },
 ];
+
+function EmailModal({ isOpen, onClose }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>×</button>
+        <h3 style={{ marginBottom: '16px', color: 'var(--text)' }}>Choose Email Address</h3>
+        <div className="email-options">
+          <a href={getEmailHref(emailAddress1)} target="_blank" rel="noreferrer" className="btn-secondary" onClick={onClose} style={{ display: 'block', marginBottom: '8px', textAlign: 'center' }}>
+            {emailAddress1}
+          </a>
+          <a href={getEmailHref(emailAddress2)} target="_blank" rel="noreferrer" className="btn-secondary" onClick={onClose} style={{ display: 'block', marginBottom: '8px', textAlign: 'center' }}>
+            {emailAddress2}
+          </a>
+          <a href={getEmailHref(`${emailAddress1},${emailAddress2}`)} target="_blank" rel="noreferrer" className="btn-primary" onClick={onClose} style={{ display: 'block', textAlign: 'center', position: 'relative' }}>
+            Send to Both
+            <span style={{ position: 'absolute', top: '0', right: '0', transform: 'translate(20%, -30%)', fontSize: '0.65rem', background: 'var(--background)', color: 'var(--text)', padding: '2px 8px', borderRadius: '12px', fontWeight: 'bold', border: '1px solid var(--border)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>Preferable</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 function LeetCodeWidget() {
   const [stats, setStats] = useState(null);
@@ -79,6 +108,7 @@ function LeetCodeWidget() {
 function App() {
   const [activeSection, setActiveSection] = useState('#home');
   const [profilePinned, setProfilePinned] = useState(false);
+  const [isMailModalOpen, setIsMailModalOpen] = useState(false);
   const profileTriggerRef = useRef(null);
 
   useEffect(() => {
@@ -191,7 +221,7 @@ function App() {
               <div className="social-links animate-fade-up delay-300">
                 <a href="https://github.com/umangarora05" target="_blank" rel="noreferrer" className="social-icon" aria-label="GitHub"><Github size={24} /></a>
                 <a href="https://linkedin.com/in/umangarora05" target="_blank" rel="noreferrer" className="social-icon" aria-label="LinkedIn"><Linkedin size={24} /></a>
-                <a href={emailHref} target="_blank" rel="noreferrer" className="social-icon" aria-label={`Email ${emailAddress}`}><Mail size={24} /></a>
+                <button type="button" onClick={() => setIsMailModalOpen(true)} className="social-icon" aria-label={`Email ${emailAddress1} or ${emailAddress2}`} style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'inherit'}}><Mail size={24} /></button>
               </div>
             </div>
           </div>
@@ -448,7 +478,7 @@ function App() {
             <h2 className="section-title animate-fade-up">Let's Build <span>Something</span></h2>
             
             <div className="contact-container animate-fade-up delay-100">
-              <form className="contact-form" action={emailHref} method="GET" target="_blank">
+              <form className="contact-form" action={getEmailHref(`${emailAddress1},${emailAddress2}`)} method="GET" target="_blank">
                 <div className="form-group">
                   <input type="text" name="name" id="name" className="form-input" placeholder=" " required />
                   <label htmlFor="name" className="form-label">Full Name</label>
@@ -472,7 +502,7 @@ function App() {
                 <h3>Contact Information</h3>
                 <div className="info-item">
                   <Mail size={24} />
-                  <a href={emailHref} target="_blank" rel="noreferrer">{emailAddress}</a>
+                  <button type="button" onClick={() => setIsMailModalOpen(true)} style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'var(--primary)', font: 'inherit', textDecoration: 'underline'}}>Email Me</button>
                 </div>
                 <div className="info-item">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -518,10 +548,11 @@ function App() {
           <a href="https://github.com/umangarora05" target="_blank" rel="noreferrer"><Github size={20} /></a>
           <a href="https://linkedin.com/in/umangarora05" target="_blank" rel="noreferrer"><Linkedin size={20} /></a>
           <a href="https://leetcode.com/u/UmangArora05" target="_blank" rel="noreferrer"><Code2 size={20} /></a>
-          <a href={emailHref} target="_blank" rel="noreferrer" aria-label={`Email ${emailAddress}`}><Mail size={20} /></a>
+          <button type="button" onClick={() => setIsMailModalOpen(true)} aria-label="Email Me" style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: 'inherit'}}><Mail size={20} /></button>
         </div>
         <div style={{fontSize:'0.875rem', opacity:0.6}}>© 2026 Umang Arora. All rights reserved.</div>
       </footer>
+      <EmailModal isOpen={isMailModalOpen} onClose={() => setIsMailModalOpen(false)} />
     </div>
   );
 }
